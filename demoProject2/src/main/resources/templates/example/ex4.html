@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타임리프예제4</title>
+</head>
+<body>
+
+    <h1>타임리프예제4</h1>
+    
+    <h3>타임리프 조건문 -1 th:if/ th:unless</h3>
+
+    <pre>
+        th:if=${조건식}
+        -조건식이 투르인 경우에만 해당속성이 작성된 요소를 화면에 출력
+        
+        th:unless=${조건식}
+        -조건식이 펄스인경우에만 해당속성이 작성된 요소를 화면에 출력
+    </pre>
+
+
+    <th:block th:if="${std==null}"> 
+        <h4>std없음</h4>
+    </th:block>
+
+    <th:block th:unless="${std==null}">
+        <h4>std있음</h4>
+    </th:block>
+
+    <hr><hr>
+
+    <h3>th:if / th:unless 조건식에 변수명/값 하나만 작성한 경우</h3>
+
+    <pre>
+        if문에 작성된 값이 있으면 null이 아니면 트루
+        잎문에작성된값이 이없으면 널이면       펄스
+    </pre>
+
+    <h4 th:if="${std}"> std있음</h4>
+    <h4 th:if="${temp}"> temp없음</h4>
+
+    <hr><hr>
+
+    <h3>타임리프 조건문[2] -th:wsitch/th:case</h3>
+    <th:block th:switch="${num}">
+        <h4 th:case="100">파라미터 num==100</h4>
+        <h4 th:case="200">파라미터 num==200</h4>
+        <h4 th:case="300">파라미터 num==300</h4>
+
+        <h4 th:case="*">default</h4>
+
+    </th:block>
+
+    <hr><hr>
+
+    <h3>삼항연산자</h3>
+    <pre>
+        -타임리프 속성 에 삼항연산자 (조건식? 참일경우 :거짓일경우)
+        작성법잘익혀두기
+    </pre>
+
+    <h4 th:text="${std.age==30}?'서른맞음':'서른아님'"></h4>
+
+    <hr><Hr>
+
+        <h3>Elvis연산자(?:)</h3>
+
+        <pre>
+            [작성법]
+            값 ?: 값이 없을 때
+        
+            - 삼항 연산자에서 조건식 자리에 값(변수명)만 작성
+              (==, != 등의 연산자 사용 X)
+
+            -우변에는 값이 없을때에 대한 값만 작성
+
+            -조건식 값이 존재하면 해당 값 출력 없으면 우변출력
+
+            -해당값이 있는지 없는지에 따라 동작하는 연산자
+        
+          </pre>
+
+
+     <!-- 회원 데이터 없음 -->
+  <p th:text="${member} ?: '회원 데이터 없음'"></p>
+
+  <!-- std.toString() 결과 출력 -->
+  <p th:text="${std} ?: '학생 데이터 없음'"></p>      
+
+<hr><hr>
+
+<H3>no-operation 연ㅇ산자 (값 ?:_)</H3>
+<pre>
+    -조건식의 값이 없을 경우 (==null) 타임리프 코드를 해석하지않는연산자
+    -타임리프코드해석 X->일반HTML태그로 동작 ->HTML태그사이 내용이 화면에출력
+</pre>
+
+<p th:text="${memeber} ?:_">일반적인피태그가 되버렷어 정보없자나</p>
+<p th:text="${std} ?:_">일반적인피태그가 되버렷어</p>
+
+
+ <!-- html 파일 전체를 하나의 조각으로 취급 -->
+ <th:block th:replace="~{fragments/footer}"></th:block>
+
+</body>
+</html>
