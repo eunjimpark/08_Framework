@@ -26,6 +26,26 @@ public interface TodoMapper {
 	//할일추가
 	int addTodo(Todo todo);
 
+
+	//할일상세조회
+	Todo todoDetail(int todoNo);
+
+
+	int deleteTodo(int todoNo);
+
+	//할일수정
+	int todoUpdate(Todo todo);
+
+
+	int changeComplete(Todo todo);
+
+
+	
+	//전체할일갯수조회
+	int getTotalCount();
+	
+	
+
 	
 	
 }
