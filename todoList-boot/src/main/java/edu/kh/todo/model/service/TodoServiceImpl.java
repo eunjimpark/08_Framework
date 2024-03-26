@@ -100,6 +100,12 @@ public class TodoServiceImpl implements TodoService{
 	}
 	
 	
+	//할일목록조회
+	@Override
+	public List<Todo> selectList() {
+		
+		return mapper.selectAll();
+	}
 	
 	
 }
