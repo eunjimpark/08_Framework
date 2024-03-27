@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{app.name}">message.properties값 출력</title>
+    <th:block th:replace="~{common/common}"></th:block>
+</head>
+<body>
+
+    <main>
+        <th:block th:replace="~{common/header}"></th:block>
+
+        <!--메인페이지 내용-->
+        <section class="content">
+            <section class="content-1">
+                <th:block th:text="${session.loginMember}"></th:block>
+            </section>
+            <section class="content-2">
+                <form action="/member/login" method="POST" id="loginForm">
+                    <fieldset class="id-pw-area">
+                        <section>
+                            <input type="text" name="memberEmail"
+                            placeholder="이메일" autocomplete="on">
+                            <input type="password" name="memberPw"
+                            placeholder="비밀번호">
+                        </section>
+                        <section>
+                            <button>로그인</button>
+                        </section>
+                    </fieldset>
+                    <label>
+                        <input type="checkbox" name="saveId">
+                        아이디저장
+                    </label>
+                    <article class="signup-find-area">
+                        <a href="#">회원가입</a>
+                        <span>|</span>
+                        <a href="#">ID/PW 찾기</a>
+                    </article>
+                </form>
+            </section>
+        </section>
+    </main>
+
+
+    <th:block th:replace="~{common/footer}"></th:block>
+    
+</body>
+</html>
