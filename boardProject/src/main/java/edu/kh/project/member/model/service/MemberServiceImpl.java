@@ -3,10 +3,14 @@ package edu.kh.project.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.project.member.model.dto.Member;
 import edu.kh.project.member.model.mapper.MemberMapper;
 
+
+@Transactional //해당클래스 메서드종료시까지 예외가발생하지않으면 commit 
+                //중간에 예외발생하면 롤백
 @Service
 public class MemberServiceImpl implements MemberService{
 	// 등록된 bean 중에서 같은 타입 또는 상속관계인 bean을
@@ -46,6 +50,54 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginMember;
 	}
+	
+	
+	
+	// 회원 가입 서비스
+	@Override
+	public int signup(Member inputMember, String[] memberAddress) {
+		
+		// 주소가 입력되지 않으면
+		// inputMember.getMemeberAddress()  -> ",,"
+		// memberAddress -> [,,]
+		
+		
+		// 주소가 입력된 경우!
+		if( !inputMember.getMemberAddress().equals(",,")   ) {
+			
+			// String.join("구분자", 배열)
+			// -> 배열의 모든 요소 사이에 "구분자"를 추가하여
+			//   하나의 문자열로 만드는 메서드
+			String address = String.join("^^^", memberAddress);
+			// inputMember 주소로 합쳐진 주소를 세팅
+			inputMember.setMemberAddress(address);
+			
+		}else {
+			inputMember.setMemberAddress(null); // null 저장
+		}
+		
+		//비밀번호암호화
+		String encPw = bcrypt.encode(inputMember.getMemberPw());
+		inputMember.setMemberPw(encPw);
+		
+		return mapper.signup(inputMember);
+	}
+
+
+	
+	// 이메일 중복 검사
+	@Override
+	public int checkEmail(String memberEmail) {
+		return mapper.checkEmail(memberEmail);
+	}
+	
+	// 닉네임 중복 검사
+	@Override
+	public int checkNickname(String memberNickname) {
+		return mapper.checkNickname(memberNickname);
+	}
+	
+	
 	
 }
 
