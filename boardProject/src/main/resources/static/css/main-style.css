@@ -27,6 +27,11 @@
     flex-grow: 1;       /* 중심축 방향으로 팽창 */
     min-height: 500px;
   }
+
+  @media (max-width:1140px){
+    main{width : 100%}
+
+  }
   
   /* *********** header *********** */
   header{
