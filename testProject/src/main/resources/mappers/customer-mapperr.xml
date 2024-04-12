@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+					<!-- 연결할 Mapper Interface 작성 -->
+<mapper namespace="com.kh.test.customer.model.mapper.CustomerMapper">
+
+
+
+  	<!-- 고객 추가 -->
+ 	<insert id="plus" >
+ 		INSERT INTO "CUSTOMER"
+		VALUES(SEQ_CUSTOMER_NO.NEXTVAL, 
+			 #{customerName},
+			 #{customerPhone},
+			 #{customerAddress},
+		)
+ 	</insert>
+ 
+ 
+ 
+</mapper>
